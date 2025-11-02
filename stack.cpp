@@ -22,11 +22,9 @@ public:
         return head == NULL;
     }
 
-    void insertAtEnd()
+    void push(int val)
     {
-        int val;
-        cout << "Enter Data " << endl;
-        cin >> val;
+
         node *nN = new node(val);
 
         if (isEmpty())
@@ -40,7 +38,7 @@ public:
         }
     }
 
-    void deleteFromEnd()
+    void pop()
     {
         if (isEmpty())
         {
@@ -81,49 +79,141 @@ public:
         }
         cout << endl;
     }
+
+    int top()
+    {
+        return tail->data;
+    }
+
+    void isValidParenthisis()
+    {    
+        bool istrue=true;
+         int arr[6] = {'(', '{', '[', ']', '}', ')'};
+          int size=6;
+
+        for (int i = 0; i < size; i++)
+        {
+            if ((arr[i] == '(') || (arr[i] == '[') || (arr[i] == '{'))
+            {
+                push(arr[i]);
+            }
+            else
+            {
+                if (isEmpty())
+                {
+                      istrue= false;
+                }
+            
+
+            if ((top() == '(' && arr[i] == ')') ||
+                (top() == '{' && arr[i] == '}') ||
+                (top() == '[' && arr[i] == ']'))
+            {
+                pop();
+            }
+            else
+            {
+                istrue= false;
+            }
+        }
+    }
+        if (isEmpty()){
+            istrue= true;
+        }
+        else{
+              istrue= false;
+        }
+
+
+         if (  istrue)
+    {
+        cout << " valid " << endl;
+    }
+    else
+    {
+        cout << "invalid " << endl;
+    }
+
+
+    }
+
+    void nextGreater(){
+       
+        int arr[5]={9,4,7,3,2};
+        int size=5;
+        int ans[size]{0,0,0,0,0};
+        
+        for(int i=size-1;i>=0;i--){
+
+            while( !isEmpty() && top()<=arr[i]){
+                pop();
+            }
+
+            if(isEmpty()){
+                ans[i]=-1;
+            }
+            else{
+                ans[i]=top();
+            }
+            push(arr[i]);
+        }
+
+        for(int i=0;i<size;i++){
+            cout<<ans[i]<<" ";
+        }
+    }
 };
 
 int main()
 {
     LinkedList aa;
 
-    int choise = 0;
+    // int choise = 0;
 
-    while (choise != 4)
-    {
-        cout << "*************************< Stack >********************************" << endl;
-        cout << " Enter Choise " << endl;
-        cout << " (1) Push " << endl;
-        cout << " (2) POP" << endl;
-        cout << " (3) Display " << endl;
-        cout << " (4) Exit " << endl;
-        cin>>choise;
+    // while (choise != 4)
+    // {
+    //     cout << "*************************< Stack >********************************" << endl;
+    //     cout << " Enter Choise " << endl;
+    //     cout << " (1) Push " << endl;
+    //     cout << " (2) POP" << endl;
+    //     cout << " (3) Display " << endl;
+    //     cout << " (4) Exit " << endl;
+    //     cin>>choise;
 
-        switch (choise)
-        {
-        case 1:
-            aa.insertAtEnd();
+    //     switch (choise)
+    //     {
+    //     case 1:
+    //     cout<<"enetr value";
+    //     int val;
+    //     cin>>val;
+    //         aa.push( val);
 
-            break;
+    //         break;
 
-        case 2:
+    //     case 2:
 
-            aa.deleteFromEnd();
+    //         aa.pop();
 
-            break;
-        case 3:
-            aa.display();
-            break;
-        case 4:
+    //         break;
+    //     case 3:
+    //         aa.display();
+    //         break;
+    //     case 4:
 
-            cout << " Exiting.... ";
-            break;
+    //         cout << " Exiting.... ";
+    //         break;
 
-        default:
-            cout << "invalid input! "<<endl;
-            break;
-        }
-    }
+    //     default:
+    //         cout << "invalid input! "<<endl;
+    //         break;
+    //     }
+    // }
+
+    
+
+  //  aa.isValidParenthisis();
+
+    aa.nextGreater();
 
     return 0;
 }
